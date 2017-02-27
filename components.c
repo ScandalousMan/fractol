@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:53 by aguemy            #+#    #+#             */
-/*   Updated: 2017/02/27 21:34:04 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/02/27 21:59:01 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ t_param	param_init(void *mlx, void *win, void *img, char *addr)
 	param.win = win;
 	param.img = img;
 	param.addr = addr;
+	param.marg_i = HEIGHT / 2;
+	param.marg_j = WIDTH / 2;
+	param.zoom = 1;
 	param.ratio = 4 / (double)(ft_min(HEIGHT, WIDTH));
 	return (param);
 }
@@ -39,7 +42,10 @@ char	*addr_init(void *img)
 
 void	store_pixel(t_param param, int i, int j, int color)
 {
-	param.addr[(i * WIDTH + j) * 4 + 2] = color / 256 / 256;
-	param.addr[(i * WIDTH + j) * 4 + 1] = color % (256 * 256) / 256;
-	param.addr[(i * WIDTH + j) * 4 + 0] = color % 256;
+	if (i >= 0 && i < HEIGHT && j >= 0 && j < WIDTH)
+	{
+		param.addr[(i * WIDTH + j) * 4 + 2] = color / 256 / 256;
+		param.addr[(i * WIDTH + j) * 4 + 1] = color % (256 * 256) / 256;
+		param.addr[(i * WIDTH + j) * 4 + 0] = color % 256;
+	}
 }

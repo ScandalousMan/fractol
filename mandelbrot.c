@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:57:20 by aguemy            #+#    #+#             */
-/*   Updated: 2017/02/27 21:35:04 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/02/27 21:59:27 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		higher_than_two(double x, double y, t_param param)
 {
-	if (param.ratio * param.ratio * (x * x + y * y) < 4)
+	if (param.ratio * param.ratio * param.zoom * param.zoom * (x * x + y * y) < 4)
 		return (0);
 	return (1);
 }
@@ -25,8 +25,8 @@ void	mandelbrot_iter(double **z, int i, int j, t_param param)
 
 	tmp = (*z)[0];
 	(*z)[0] = (*z)[0] * (*z)[0] - (*z)[1] * (*z)[1] +
-		((double)i - (double)WIDTH / 2) * param.ratio;
-	(*z)[1] = 2 * tmp * (*z)[1] + ((double)j - (double)HEIGHT / 2) * param.ratio;
+		((double)i - (double)param.marg_j) * param.ratio * param.zoom;
+	(*z)[1] = 2 * tmp * (*z)[1] + ((double)j - (double)param.marg_i) * param.ratio * param.zoom;
 }
 
 void	mandelbrot_filler(t_param param)
@@ -57,16 +57,6 @@ void	mandelbrot_filler(t_param param)
 						store_pixel(param, i, j, (double)depth / DEPTH * 0x00FFFFFF);
 						flag = 0;
 					}
-/*					else
-					{
-						ft_putstr("(i,j,depth) = ");
-						ft_putnbr(i);
-						ft_putstr(",");
-						ft_putnbr(j);
-						ft_putstr(",");
-						ft_putnbr(depth);
-						ft_putstr(")\n");
-					}*/
 					depth++;
 				}
 				j++;
@@ -74,6 +64,7 @@ void	mandelbrot_filler(t_param param)
 			i++;
 		}
 	}
+	mlx_put_image_to_window(param.mlx, param.win, param.img, 50, 50);
 }
 
 void	mandelbrot_starter(void)
@@ -90,7 +81,7 @@ void	mandelbrot_starter(void)
 	addr = addr_init(img);
 	param = param_init(mlx, win, img, addr);
 	mandelbrot_filler(param);
-	mlx_put_image_to_window(mlx, win, img, 50, 50);
+//	mlx_put_image_to_window(mlx, win, img, 50, 50);
 	mlx_hook(param.win, 2, 1L << 2, my_key_func, &param);
 	mlx_loop(param.mlx);
 }

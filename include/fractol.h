@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/02/27 21:30:55 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/02/27 21:58:12 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@
 
 typedef struct	s_param
 {
-	double			ratio;
 	void			*mlx;
 	void			*win;
 	void			*img;
 	char			*addr;
+	double			zoom;
+	double			ratio;
+	int				marg_i;
+	int				marg_j;
 }				t_param;
 
 t_param			param_init(void *mlx, void *win, void *img, char *addr);
@@ -40,5 +43,6 @@ void			mandelbrot_starter(void);
 void			julia_starter(void);
 int				my_key_func(int keycode, t_param *param);
 char			*addr_init(void *img);
+void			mandelbrot_filler(t_param param);
 
 #endif
