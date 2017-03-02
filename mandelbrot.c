@@ -6,27 +6,26 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:57:20 by aguemy            #+#    #+#             */
-/*   Updated: 2017/02/27 21:59:27 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/02 16:38:34 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		higher_than_two(double x, double y, t_param param)
+int		higher_than_two(double x, double y)
 {
-	if (param.ratio * param.ratio * param.zoom * param.zoom * (x * x + y * y) < 4)
+	if ((x * x + y * y) < 4.0)
 		return (0);
 	return (1);
 }
 
-void	mandelbrot_iter(double **z, int i, int j, t_param param)
+void	mandelbrot_iter(double x, double y, t_param *param)
 {
 	double	tmp;
 
-	tmp = (*z)[0];
-	(*z)[0] = (*z)[0] * (*z)[0] - (*z)[1] * (*z)[1] +
-		((double)i - (double)param.marg_j) * param.ratio * param.zoom;
-	(*z)[1] = 2 * tmp * (*z)[1] + ((double)j - (double)param.marg_i) * param.ratio * param.zoom;
+	tmp = param->z[0];
+	param->z[0] = param->z[0] * param->z[0] - param->z[1] * param->z[1] + x;
+	param->z[1] = 2 * tmp * param->z[1] + y;
 }
 
 void	mandelbrot_filler(t_param param)
@@ -47,14 +46,14 @@ void	mandelbrot_filler(t_param param)
 			{
 				flag = 1;
 				depth = 0;
-				z[0] = 0;
-				z[1] = 0;
+				param.z[0] = 0;
+				param.z[1] = 0;
 				while (depth < DEPTH && flag)
 				{
-					mandelbrot_iter(&z, j, i, param);
-					if (higher_than_two(z[0], z[1], param))
+					mandelbrot_iter(j, i, &param);
+					if (higher_than_two(z[0], z[1]))
 					{
-						store_pixel(param, i, j, (double)depth / DEPTH * 0x00FFFFFF);
+						store_pixel(&param, i, j, NULL);
 						flag = 0;
 					}
 					depth++;

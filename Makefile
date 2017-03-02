@@ -6,13 +6,13 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/15 14:04:04 by aguemy            #+#    #+#              #
-#    Updated: 2017/02/27 20:56:41 by aguemy           ###   ########.fr        #
+#    Updated: 2017/03/02 10:06:10 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 CC = gcc
-CFLAGS =  -Wall -Werror -Wextra 
+CFLAGS =  -Wall -Werror -Wextra
 LFLAGS = -lmlx -framework AppKit -framework OpenGL -L $(LIB_PATH) -lft
 HEADER = -I./include
 OBJ = $(SRC:.c=.o)
@@ -22,7 +22,8 @@ SRC = main.c \
 	components.c \
 	key_func.c \
 	mandelbrot.c \
-	julia.c
+	julia.c \
+	buddhabrot.c
 
 # COLORS
 C_NO = "\033[00m"

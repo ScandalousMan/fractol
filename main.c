@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:14 by aguemy            #+#    #+#             */
-/*   Updated: 2017/02/27 21:00:19 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/02/28 16:20:17 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		fractal_lister(char *str)
 		mandelbrot_starter();
 	else if (!(ft_strcmp(str, "Julia")))
 		julia_starter();
+	else if (!(ft_strcmp(str, "Buddhabrot")))
+		buddha_starter();
 	else
 		return (error_input());
 	return (1);

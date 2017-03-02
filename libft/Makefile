@@ -6,13 +6,13 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/21 15:23:17 by aguemy            #+#    #+#              #
-#    Updated: 2017/02/27 20:58:45 by aguemy           ###   ########.fr        #
+#    Updated: 2017/02/28 15:48:38 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 
 SRC = ft_isascii.c ft_lstiter.c ft_memcpy.c ft_putendl_fd.c ft_strclr.c  \
 	  ft_striteri.c ft_strncmp.c ft_strstr.c ft_isdigit.c ft_lstmap.c \
