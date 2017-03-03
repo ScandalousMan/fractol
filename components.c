@@ -6,11 +6,26 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:53 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/02 16:46:09 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/03 19:12:20 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		higher_than_two(double x, double y, double two)
+{
+	if ((x * x + y * y) < two * two)
+		return (0);
+	return (1);
+}
+
+int		rgb_color(unsigned char red, unsigned char green, unsigned char blue)
+{
+	int		rgb;
+
+	rgb = (blue << 24) | (green << 16) | (red << 8);
+	return (rgb);
+}
 
 t_param	param_init(void *mlx, void *win, void *img, char *addr)
 {
@@ -40,13 +55,12 @@ char	*addr_init(void *img)
 	return (addr);
 }
 
-void	store_pixel(t_param *param, int i, int j, int *color)
+void	store_pixel(t_param *param, int i, int j, int color)
 {
 	if (i >= 0 && i < HEIGHT && j >= 0 && j < WIDTH)
 	{
-		color[0] = color[1];
-		param->addr[(i * WIDTH + j) * 4 + 2] = color[0];
-		param->addr[(i * WIDTH + j) * 4 + 1] = color[1];
-		param->addr[(i * WIDTH + j) * 4 + 0] = color[2];
+		param->addr[(i * WIDTH + j) * 4 + 2] = color >> 8;
+		param->addr[(i * WIDTH + j) * 4 + 1] = color >> 16;
+		param->addr[(i * WIDTH + j) * 4 + 0] = color >> 24;
 	}
 }

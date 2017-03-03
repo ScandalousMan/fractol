@@ -6,18 +6,11 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:57:20 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/02 16:38:34 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/03 19:29:05 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-int		higher_than_two(double x, double y)
-{
-	if ((x * x + y * y) < 4.0)
-		return (0);
-	return (1);
-}
 
 void	mandelbrot_iter(double x, double y, t_param *param)
 {
@@ -28,7 +21,7 @@ void	mandelbrot_iter(double x, double y, t_param *param)
 	param->z[1] = 2 * tmp * param->z[1] + y;
 }
 
-void	mandelbrot_filler(t_param param)
+void	mandelbrot_filler(t_param *param)
 {
 	int		depth;
 	int		i;
@@ -46,14 +39,17 @@ void	mandelbrot_filler(t_param param)
 			{
 				flag = 1;
 				depth = 0;
-				param.z[0] = 0;
-				param.z[1] = 0;
-				while (depth < DEPTH && flag)
+				param->z[0] = 0;
+				param->z[1] = 0;
+				while (depth < ITER_MAX_MANDELBROT && flag)
 				{
-					mandelbrot_iter(j, i, &param);
-					if (higher_than_two(z[0], z[1]))
+					mandelbrot_iter(((double)j - (double)param->marg_j) /
+						(double)WIDTH * 4.0 * param->zoom, ((double)i -
+						(double)param->marg_i) / (double)HEIGHT * 4.0 *
+						param->zoom, param);
+					if (higher_than_two(param->z[0], param->z[1], 2.0))
 					{
-						store_pixel(&param, i, j, NULL);
+						store_pixel(param, i, j, (double)depth / (double)ITER_MAX_MANDELBROT * 0x00FFFFFF);
 						flag = 0;
 					}
 					depth++;
@@ -63,7 +59,7 @@ void	mandelbrot_filler(t_param param)
 			i++;
 		}
 	}
-	mlx_put_image_to_window(param.mlx, param.win, param.img, 50, 50);
+	mlx_put_image_to_window(param->mlx, param->win, param->img, 50, 50);
 }
 
 void	mandelbrot_starter(void)
@@ -79,8 +75,13 @@ void	mandelbrot_starter(void)
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	addr = addr_init(img);
 	param = param_init(mlx, win, img, addr);
-	mandelbrot_filler(param);
-//	mlx_put_image_to_window(mlx, win, img, 50, 50);
-	mlx_hook(param.win, 2, 1L << 2, my_key_func, &param);
-	mlx_loop(param.mlx);
+	param.marg_i = HEIGHT / 2;
+	param.marg_j = WIDTH / 2;
+	param.origin = 0;
+	if ((param.z = (double*)malloc(sizeof(double) * 2)) && (param.c = (double*)malloc(sizeof(double) * 2)))
+	{
+		mandelbrot_filler(&param);
+		mlx_hook(param.win, 2, 1L << 2, my_key_func, &param);
+		mlx_loop(param.mlx);
+	}
 }

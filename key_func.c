@@ -6,11 +6,21 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/02/27 22:02:41 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/03 18:43:16 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	back_to_function(t_param *param)
+{
+	if (param->origin == 0)
+		mandelbrot_filler(param);
+	else if (param->origin == 1)
+		julia_filler(param);
+	else if (param->origin == 2)
+		buddhabrot_filler(param);
+}
 
 int		my_key_func(int keycode, t_param *param)
 {
@@ -29,6 +39,6 @@ int		my_key_func(int keycode, t_param *param)
 	else if (keycode == 53)
 		exit(0);
 	ft_bzero(param->addr, HEIGHT * WIDTH * 4);
-	mandelbrot_filler(*param);
-		return (0);
+	back_to_function(param);
+	return (0);
 }

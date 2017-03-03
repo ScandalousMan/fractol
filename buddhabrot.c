@@ -6,39 +6,32 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:24:57 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/02 16:48:29 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/03 19:08:38 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		*buddha_color(int i, int j, t_param *param)
+int		buddha_color(int i, int j, t_param *param)
 {
-	int		*rgb;
+	int		rgb;
 
-	if (!(rgb = (int*)malloc(sizeof(int) * 3)))
-		return (NULL);
-	if (param->tab[i][j] == 0)
-	{
-		rgb[0] = 0;
-		rgb[1] = 0;
-		rgb[2] = 0;
-	}
-	else if (param->max != 0)
-	{
-		rgb[0] = 128 + trunc(sqrt((double)param->tab[i][j]) / sqrt((double)param->max) * 127);
-		rgb[1] = rgb[0];
-		rgb[2] = rgb[0];
-		return (rgb);
-	}
-	return (NULL);
+	rgb = 0;
+	if (!(param->tab[i][j] == 0) && param->max != 0)
+		rgb = rgb_color((unsigned char)trunc(sqrt((double)param->tab[i][j]) *
+			RED / sqrt((double)param->max)),
+			(unsigned char)trunc(sqrt((double)param->tab[i][j]) *
+			GREEN / sqrt((double)param->max)),
+			(unsigned char)trunc(sqrt((double)param->tab[i][j]) *
+			BLUE / sqrt((double)param->max)));
+	return (rgb);
 }
 
 void	tab_to_pixels(t_param *param)
 {
 	int		i;
 	int		j;
-	int		*col;
+	int		col;
 
 	i = 0;
 	while (i < HEIGHT)
@@ -46,8 +39,6 @@ void	tab_to_pixels(t_param *param)
 		j = 0;
 		while (j < WIDTH)
 		{
-//			store_pixel(param, i, j, (int)((double)0x00FFFFFF *
-//				((double)param->tab[i][j] / (double)param->max)));
 			if ((col = buddha_color(i, j, param)))
 				store_pixel(param, i, j, col);
 			j++;
@@ -62,17 +53,17 @@ void	tab_update(t_param *param, int depth)
 	int		tmp;
 
 	i = 0;
-	while (i < depth)
+	while (i < depth - 1)
 	{
-		if ((int)round((2.0 - param->buff[depth][1]) * (double)HEIGHT / 4.0) >= 0 &&
-			(int)round((2.0 - param->buff[depth][1]) * (double)HEIGHT / 4.0) < HEIGHT &&
-			(int)round((2.0 + param->buff[depth][0]) * (double)WIDTH / 4.0) >= 0 &&
-			(int)round((2.0 + param->buff[depth][0]) * (double)WIDTH / 4.0) < WIDTH &&
-			((int)round((2.0 - param->buff[depth][1]) * (double)HEIGHT / 4.0) != HEIGHT / 2.0 ||
-			(int)round((2.0 + param->buff[depth][0]) * (double)WIDTH / 4.0) != WIDTH / 2.0))
+		if ((int)trunc((SUP_BORN - param->buff[i][1]) * (double)WIDTH / 2.0 / SUP_BORN) > 0 &&
+			(int)trunc((SUP_BORN - param->buff[i][1]) * (double)WIDTH / 2.0 / SUP_BORN) < WIDTH &&
+			(int)trunc((SUP_BORN + param->buff[i][0]) * (double)HEIGHT / 2.0 / SUP_BORN) > 0 &&
+			(int)trunc((SUP_BORN + param->buff[i][0]) * (double)HEIGHT / 2.0 / SUP_BORN) < HEIGHT &&
+			((int)trunc((SUP_BORN - param->buff[i][1]) * (double)WIDTH / 2.0 / SUP_BORN) != WIDTH / 2.0 ||
+			(int)trunc((SUP_BORN + param->buff[i][0]) * (double)HEIGHT / 2.0 / SUP_BORN) != HEIGHT / 2.0))
 		{
-			tmp = param->tab[(int)round((2.0 - param->buff[depth][1]) * (double)(HEIGHT) /
-				4.0)][(int)round((param->buff[depth][0] + 2.0) * (double)WIDTH / 4.0)]++;
+			tmp = param->tab[(int)trunc((SUP_BORN + param->buff[i][0]) * (double)HEIGHT /
+				2.0 / SUP_BORN)][(int)trunc((SUP_BORN - param->buff[i][1]) * (double)WIDTH / 2.0 / SUP_BORN)]++;
 			if (tmp > param->max)
 				param->max = tmp;
 		}
@@ -80,75 +71,43 @@ void	tab_update(t_param *param, int depth)
 	}
 }
 
-void	tab_display(int **tab)
-{
-	int		i;
-	int		j;
-
-	i = HEIGHT / 2;
-	ft_putstr("Check tab 0\n");
-	j = 0;
-	while (j < WIDTH)
-	{
-		ft_putnbr(tab[i][j]);
-		ft_putstr(",");
-		j++;
-	}
-	ft_putstr("\n");
-}
-/*
-void	tab_update_bis(t_param *param)
-{
-	int		tmp;
-
-	if ((int)round((2.0 - param->z[1]) * (double)HEIGHT / 4.0) >= 0 &&
-		(int)round((2.0 - param->z[1]) * (double)HEIGHT / 4.0) < HEIGHT &&
-		(int)round((2.0 + param->z[0]) * (double)WIDTH / 4.0) >= 0 &&
-		(int)round((2.0 + param->z[0]) * (double)WIDTH / 4.0) < WIDTH)
-	{
-		tmp = param->tab[(int)round((2.0 - param->z[1]) * (double)(HEIGHT) /
-			4.0)][(int)round((param->z[0] + 2.0) * (double)WIDTH / 4.0)]++;
-		if (tmp > param->max)
-			param->max = tmp;
-	}
-}*/
-
 void	buddhabrot_filler(t_param *param)
 {
 	int		depth;
 	int		i;
 	int		j;
-	int		flag;
+	int		count;
 
 	i = 0;
+	count = 0;
 	while (i < RATIO)
 	{
 		j = 0;
 		while (j < RATIO)
 		{
-			flag = 1;
 			depth = 0;
 			param->z[0] = 0.0;
 			param->z[1] = 0.0;
-			while (param->buff && depth < DEPTH && flag)
+			while (param->buff && depth < ITER_MAX && !(higher_than_two(param->z[0], param->z[1], DIVERGE)))
 			{
-				if (depth > 0)
-				{
-					param->buff[depth - 1][0] = param->z[0];
-					param->buff[depth - 1][1] = param->z[1];
-				}
-				mandelbrot_iter(((double)j - RATIO / 2.0) * 4.0 / (double)RATIO, (RATIO / 2.0 - (double)i) * 4.0 / (double)RATIO, param);
-				if ((higher_than_two(param->z[0], param->z[1])))
-				{
-					tab_update(param, depth);
-					flag = 0;
-				}
+				mandelbrot_iter(((double)j - (double)RATIO / 2.0) /
+					(double)RATIO * 2.0 * SUP_BORN, ((double)i - (double)RATIO /
+					2.0) / (double)RATIO * 2.0 * SUP_BORN, param);
+				param->buff[depth][0] = param->z[0];
+				param->buff[depth][1] = param->z[1];
 				depth++;
+			}
+			if ((higher_than_two(param->z[0], param->z[1], DIVERGE)) && depth > ITER_MIN)
+			{
+				tab_update(param, depth);
+				count++;
 			}
 			j++;
 		}
 		i++;
 	}
+	ft_putnbr(count);
+	ft_putstr(" special points\n");
 	ft_putstr("Tableau rempli\n");
 	tab_to_pixels(param);
 	ft_putstr("Image remplie\n");
@@ -161,9 +120,9 @@ double	**memory_buffer(void)
 	double	**buff;
 
 	i = 0;
-	if (!(buff = (double**)malloc(sizeof(double*) * DEPTH)))
+	if (!(buff = (double**)malloc(sizeof(double*) * ITER_MAX)))
 		return (NULL);
-	while (i < DEPTH)
+	while (i < ITER_MAX)
 	{
 		if (!(buff[i] = (double*)malloc(sizeof(double) * 2)))
 			return (NULL);
@@ -211,13 +170,14 @@ void	buddha_starter(void)
 	param = param_init(mlx, win, img, addr);
 	param.tab = tab_init();
 	param.max = 0;
+	param.zoom = 1.0;
+	param.origin = 2;
+	param.marg_i = HEIGHT / 2;
+	param.marg_j = WIDTH / 2;
 	param.buff = memory_buffer();
-	if ((param.z = (double*)malloc(sizeof(double) * 2)))
+	if ((param.z = (double*)malloc(sizeof(double) * 2)) && (param.c = (double*)malloc(sizeof(double) * 2)))
 	{
 		buddhabrot_filler(&param);
-/*		tab_update2(&param);
-		tab_to_pixels(&param);
-		mlx_put_image_to_window(param.mlx, param.win, param.img, 50, 50);*/
 		mlx_hook(param.win, 2, 1L << 2, my_key_func, &param);
 		mlx_loop(param.mlx);
 	}
