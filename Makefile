@@ -6,7 +6,7 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/15 14:04:04 by aguemy            #+#    #+#              #
-#    Updated: 2017/03/02 10:06:10 by aguemy           ###   ########.fr        #
+#    Updated: 2017/03/06 21:25:31 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,13 @@ LIB_PATH = ./libft/
 LIB = $(LIB_PATH)libft.a
 SRC = main.c \
 	components.c \
+	ft_atod.c \
 	key_func.c \
 	mandelbrot.c \
 	julia.c \
-	buddhabrot.c
+	buddhabrot.c \
+	buddhabrot_components.c \
+	julia_exp.c
 
 # COLORS
 C_NO = "\033[00m"

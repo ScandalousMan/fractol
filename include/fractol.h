@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/03 19:16:07 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/06 21:24:54 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define ITER_MAX 1500
 # define ITER_MIN 50
 # define ITER_MAX_MANDELBROT 50
+# define ITER_MAX_JULIA 50
+# define ITER_MAX_JULIA_EXP 500
+# define JULIA_MODULE 1000
 # define RATIO 800
 # define DIVERGE 2.0
 # define SUP_BORN 1.5
@@ -51,18 +54,29 @@ typedef struct	s_param
 	int				origin;
 }				t_param;
 
+double			ft_atod(const char *str);
 t_param			param_init(void *mlx, void *win, void *img, char *addr);
 int				rgb_color(unsigned char r, unsigned char g, unsigned char b);
 void			store_pixel(t_param *param, int i, int j, int color);
 void			mandelbrot_starter(void);
-void			julia_starter(void);
+void			julia_starter(int argc, char **str);
+void			julia_exp_starter(int argc, char **str);
 void			buddha_starter(void);
 int				my_key_func(int keycode, t_param *param);
 char			*addr_init(void *img);
 void			mandelbrot_filler(t_param *param);
 void			julia_filler(t_param *param);
+void			julia_exp_filler(t_param *param);
 void			buddhabrot_filler(t_param *param);
-int				higher_than_two(double x, double y, double two);//x2 + y2 < 4 ?
-void			mandelbrot_iter(double x, double y, t_param *param);//Zn+1 = Zn2 + c
+/*
+**-----------------Components for Buddhabrot------------------------------------
+*/
+int				buddha_color(int i, int j, t_param *param);
+void			tab_to_pixels(t_param *param);
+void			tab_update(t_param *param, int depth);
+double			**memory_buffer(void);
+int				**tab_init(void);
+int				higher_than_two(double x, double y, double two);
+void			mandelbrot_iter(double x, double y, t_param *param);
 
 #endif
