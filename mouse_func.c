@@ -1,45 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_func.c                                         :+:      :+:    :+:   */
+/*   mouse_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/10 16:53:17 by aguemy           ###   ########.fr       */
+/*   Created: 2017/03/10 16:30:25 by aguemy            #+#    #+#             */
+/*   Updated: 2017/03/10 17:59:10 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	back_to_function(t_param *param)
+int		my_mouse_hook(int button, int x, int y, t_param *param)
 {
-	if (param->origin == 0)
-		mandelbrot_filler(param);
-	else if (param->origin == 1)
-		julia_filler(param);
-	else if (param->origin == 2)
-		buddhabrot_filler(param);
-	else if (param->origin == 3)
-		julia_exp_filler(param);
-}
-
-int		my_key_func(int keycode, t_param *param)
-{
-	if (keycode == 12)
+	x -= 50;
+	y -= 50;
+	if (button == 5)
+	{
 		param->zoom = param->zoom * ZOOM_PARAM;
-	else if (keycode == 13)
+		param->marg_j = (double)x + ((double)param->marg_j - (double)x) / ZOOM_PARAM;
+		param->marg_i = (double)y + ((double)param->marg_i - (double)y) / ZOOM_PARAM;
+	}
+	if (button == 4)
+	{
 		param->zoom = param->zoom / ZOOM_PARAM;
-	else if (keycode == 126)
-		param->marg_i += 10;
-	else if (keycode == 125)
-		param->marg_i -= 10;
-	else if (keycode == 124)
-		param->marg_j += 10;
-	else if (keycode == 123)
-		param->marg_j -= 10;
-	else if (keycode == 53)
-		exit(0);
+		param->marg_j = (double)x + ZOOM_PARAM * ((double)param->marg_j - (double)x);
+		param->marg_i = (double)y + ZOOM_PARAM * ((double)param->marg_i - (double)y);
+	}
 	ft_bzero(param->addr, HEIGHT * WIDTH * 4);
 	back_to_function(param);
 	return (0);

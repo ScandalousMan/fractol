@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:14 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/06 19:50:43 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/10 18:10:46 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int		error_input(void)
 {
-	ft_putstr("usage: ./fractol fractal_name with fractal name among:\n");
-	ft_putstr("- Julia [Re(Z0) Im(Z0)]\n- Mandelbrot\n- Buddhabrot\n");
+	ft_putstr("usage: ./fractol fractal_name [options] :\n");
+	ft_putstr("- Mandelbrot\n- Julia [Re(Z0) Im(Z0)]\n- Buddhabrot\n");
+	ft_putstr("- Julia_exp [Re(Z0) Im(Z0)]\n");
 	return (0);
 }
 

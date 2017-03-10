@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:57:20 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/03 19:29:05 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/10 16:58:58 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	mandelbrot_starter(void)
 	{
 		mandelbrot_filler(&param);
 		mlx_hook(param.win, 2, 1L << 2, my_key_func, &param);
+		mlx_mouse_hook(param.win, my_mouse_hook, &param);
 		mlx_loop(param.mlx);
 	}
 }

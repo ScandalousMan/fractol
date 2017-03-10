@@ -6,7 +6,7 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/15 14:04:04 by aguemy            #+#    #+#              #
-#    Updated: 2017/03/06 21:25:31 by aguemy           ###   ########.fr        #
+#    Updated: 2017/03/10 16:33:13 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = main.c \
 	components.c \
 	ft_atod.c \
 	key_func.c \
+	mouse_func.c \
 	mandelbrot.c \
 	julia.c \
 	buddhabrot.c \

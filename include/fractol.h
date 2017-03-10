@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/06 21:24:54 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/10 17:16:02 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define RATIO 800
 # define DIVERGE 2.0
 # define SUP_BORN 1.5
+# define ZOOM_PARAM 1.1
 # define RED 155
 # define GREEN 200
 # define BLUE 255
@@ -63,6 +64,8 @@ void			julia_starter(int argc, char **str);
 void			julia_exp_starter(int argc, char **str);
 void			buddha_starter(void);
 int				my_key_func(int keycode, t_param *param);
+int				my_mouse_hook(int button, int x, int y, t_param *param);
+void			back_to_function(t_param *param);
 char			*addr_init(void *img);
 void			mandelbrot_filler(t_param *param);
 void			julia_filler(t_param *param);
