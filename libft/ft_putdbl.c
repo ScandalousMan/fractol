@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putdbl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/18 12:06:15 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/13 14:28:05 by aguemy           ###   ########.fr       */
+/*   Created: 2017/03/13 14:39:31 by aguemy            #+#    #+#             */
+/*   Updated: 2017/03/13 14:47:48 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <math.h>
 
-void	ft_putnbr(int n)
+void	ft_putdbl(double d)
 {
-	if (n < -9)
+	int	i;
+
+	i = 0;
+	ft_putnbr(trunc(d));
+	d -= trunc(d);
+	if (d < 0.0)
+		d = -d;
+	if (d != 0.0)
+		ft_putchar('.');
+	while (d != 0.0)
 	{
-		ft_putchar('-');
-		ft_putnbr(n / 10 * -1);
-		ft_putnbr(n % 10 * -1);
-	}
-	else if (n < 0)
-	{
-		ft_putchar('-');
-		ft_putnbr(n * -1);
-	}
-	else if (n < 10)
-		ft_putchar(n + 48);
-	else
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		d = d * 10;
+		ft_putnbr(trunc(d));
+		d -= trunc(d);
 	}
 }

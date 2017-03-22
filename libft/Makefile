@@ -6,7 +6,7 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/21 15:23:17 by aguemy            #+#    #+#              #
-#    Updated: 2017/02/28 15:48:38 by aguemy           ###   ########.fr        #
+#    Updated: 2017/03/13 18:55:18 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC = ft_isascii.c ft_lstiter.c ft_memcpy.c ft_putendl_fd.c ft_strclr.c  \
 	  ft_toupper.c ft_isalnum.c ft_lstdel.c ft_memchr.c ft_putchar_fd.c \
 	  ft_strcat.c ft_strequ.c ft_strmapi.c ft_strrchr.c ft_isalpha.c \
 	  ft_lstdelone.c ft_memcmp.c ft_putendl.c ft_strchr.c ft_striter.c \
-	  ft_strncat.c ft_strsplit.c get_next_line.c ft_max.c ft_min.c
+	  ft_strncat.c ft_strsplit.c get_next_line.c ft_max.c ft_min.c ft_putdbl.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:24:57 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/06 21:21:12 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/15 17:26:47 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	buddhabrot_filler(t_param *param)
 		}
 		i++;
 	}
-	ft_putnbr(count);
-	ft_putstr(" special points\n");
+	ft_putnbr(param->max);
+	ft_putstr(" est la valeur max\n");
 	ft_putstr("Tableau rempli\n");
 	tab_to_pixels(param);
 	ft_putstr("Image remplie\n");

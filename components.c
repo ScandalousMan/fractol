@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:53 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/08 14:56:23 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/15 14:52:39 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		rgb_color(unsigned char red, unsigned char green, unsigned char blue)
 {
 	int		rgb;
 
-	rgb = (blue << 24) | (green << 16) | (red << 8);
+	rgb = (blue << 16) | (green << 8) | (red);
 	return (rgb);
 }
 
@@ -59,8 +59,8 @@ void	store_pixel(t_param *param, int i, int j, int color)
 {
 	if (i >= 0 && i < HEIGHT && j >= 0 && j < WIDTH)
 	{
-		param->addr[(i * WIDTH + j) * 4 + 2] = color >> 0;
-		param->addr[(i * WIDTH + j) * 4 + 1] = color >> 8;
-		param->addr[(i * WIDTH + j) * 4 + 0] = color >> 16;
+		param->addr[(i * WIDTH + j) * 4 + 2] = (color) & 0xFF;
+		param->addr[(i * WIDTH + j) * 4 + 1] = (color >> 8) & 0xFF;
+		param->addr[(i * WIDTH + j) * 4 + 0] = (color >> 16) & 0xFF;
 	}
 }

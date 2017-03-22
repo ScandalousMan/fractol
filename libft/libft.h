@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 11:49:30 by aguemy            #+#    #+#             */
-/*   Updated: 2017/02/27 18:12:19 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/13 14:50:31 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr(int n);
+void				ft_putdbl(double d);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *str);
 void				ft_putstr_fd(char const *s, int fd);
