@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/16 11:29:32 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/23 17:18:03 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define RED 155
 # define GREEN 200
 # define BLUE 255
+# define SI_LVL 729
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -59,6 +60,9 @@ typedef struct	s_param
 	int				max;
 	double			**buff;
 	int				origin;
+	double			*ref;
+	double			*n;
+	double			*src;
 }				t_param;
 
 /*
@@ -105,5 +109,10 @@ void			tab_to_pixels(t_param *param);
 void			tab_update(t_param *param, int depth);
 double			**memory_buffer(void);
 int				**tab_init(void);
+/*
+**-----------------------Components for Menger Sponge---------------------------
+*/
+int				sierpinski_algo(int a, int b, int c);
+int				sierpinski_carpet(double x, double y, double z, t_param *param);
 
 #endif
