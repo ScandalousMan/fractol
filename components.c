@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:53 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/15 14:52:39 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/21 17:52:36 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,15 @@ char	*addr_init(void *img)
 	return (addr);
 }
 
-void	store_pixel(t_param *param, int i, int j, int color)
+void	store_pixel(t_param *param, int color)
 {
-	if (i >= 0 && i < HEIGHT && j >= 0 && j < WIDTH)
+	if (param->i >= 0 && param->i < HEIGHT && param->j >= 0 && param->j < WIDTH)
 	{
-		param->addr[(i * WIDTH + j) * 4 + 2] = (color) & 0xFF;
-		param->addr[(i * WIDTH + j) * 4 + 1] = (color >> 8) & 0xFF;
-		param->addr[(i * WIDTH + j) * 4 + 0] = (color >> 16) & 0xFF;
+		param->addr[(param->i * WIDTH + param->j) * 4 +
+			2] = (color) & 0xFF;
+		param->addr[(param->i * WIDTH + param->j) * 4 +
+			1] = (color >> 8) & 0xFF;
+		param->addr[(param->i * WIDTH + param->j) * 4 +
+			0] = (color >> 16) & 0xFF;
 	}
 }

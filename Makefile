@@ -6,7 +6,7 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/15 14:04:04 by aguemy            #+#    #+#              #
-#    Updated: 2017/04/21 15:19:50 by aguemy           ###   ########.fr        #
+#    Updated: 2017/04/21 18:00:08 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,15 +19,15 @@ OBJ = $(SRC:.c=.o)
 LIB_PATH = ./libft/
 LIB = $(LIB_PATH)libft.a
 SRC = main.c \
+	starters.c \
+	starters2.c \
+	iterations.c \
 	components.c \
 	ft_atod.c \
 	key_func.c \
 	mouse_func.c \
-	mandelbrot.c \
-	julia.c \
-	buddhabrot.c \
-	buddhabrot_components.c \
-	julia_exp.c
+	algorithms.c \
+	buddhabrot_components.c
 
 # COLORS
 C_NO = "\033[00m"

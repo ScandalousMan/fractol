@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/21 15:22:09 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/21 18:18:08 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@
 
 typedef struct	s_param
 {
-	int				*sponge;
+	int				i;
+	int				j;
+	int				k;
+	int				tmp;
+	int				count;
 	double			*x;
 	double			*x_init;
 	double			*z;
@@ -60,9 +64,10 @@ typedef struct	s_param
 	int				max;
 	double			**buff;
 	int				origin;
-	double			*ref;
-	double			*n;
-	double			*src;
+	int				flag;
+	int				depth;
+	void			(*algo)(struct s_param *);
+	void			(*iter)(double, double, struct s_param *);
 }				t_param;
 
 /*
@@ -75,24 +80,42 @@ typedef struct	s_param
 double			ft_atod(const char *str);
 t_param			param_init(void *mlx, void *win, void *img, char *addr);
 int				rgb_color(unsigned char r, unsigned char g, unsigned char b);
-void			store_pixel(t_param *param, int i, int j, int color);
+void			store_pixel(t_param *param, int color);
 int				higher_than_two(double x, double y, double two);
-void			mandelbrot_iter(double x, double y, t_param *param);
 /*
-**--------------------Starter des differentes fractales-------------------------
+**----------------------Iterations of different suites--------------------------
 */
+void			mandelbrot_iter(double x, double y, t_param *param);
+void			julia_exp_iter(double x, double y, t_param *param);
+void			julia_iter(double x, double y, t_param *param);
+void			burning_iter(double x, double y, t_param *param);
+/*
+**---------------------Starters of different fractals---------------------------
+*/
+void			param_zc_init(int argc, char **argv, t_param *param);
+t_param			*generic_starter();
+void			generic_launcher(t_param *param);
 void			mandelbrot_starter(void);
 void			julia_starter(int argc, char **str);
 void			julia_exp_starter(int argc, char **str);
 void			buddha_starter(void);
+void			burning_ship_starter(void);
 /*
 **----------------------Filler des differentes fractales-----------------------
 */
 void			mandelbrot_filler(t_param *param);
-void			julia_filler(t_param *param);
+void			generic_filler(t_param *param);
 void			julia_exp_filler(t_param *param);
 void			buddhabrot_filler(t_param *param);
-
+/*
+**--------------------------------Algorithms------------------------------------
+*/
+void			mandelbrot_algo(t_param *param);
+void			julia_algo(t_param *param);
+void			buddhabrot_algo(t_param *param);
+/*
+**-----------------------------------------------------------------------------
+*/
 int				my_key_func(int keycode, t_param *param);
 int				my_mouse_hook(int button, int x, int y, t_param *param);
 void			back_to_function(t_param *param);
@@ -100,9 +123,9 @@ char			*addr_init(void *img);
 /*
 **-----------------Components for Buddhabrot------------------------------------
 */
-int				buddha_color(int i, int j, t_param *param);
+int				buddha_color(t_param *param);
 void			tab_to_pixels(t_param *param);
-void			tab_update(t_param *param, int depth);
+void			tab_update(t_param *param);
 double			**memory_buffer(void);
 int				**tab_init(void);
 

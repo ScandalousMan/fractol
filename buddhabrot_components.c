@@ -6,68 +6,71 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 21:20:18 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/06 21:20:49 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/21 18:57:21 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		buddha_color(int i, int j, t_param *param)
+int		buddha_color(t_param *param)
 {
 	int		rgb;
 
 	rgb = 0;
-	if (!(param->tab[i][j] == 0) && param->max != 0)
-		rgb = rgb_color((unsigned char)trunc(sqrt((double)param->tab[i][j]) *
+	if (!(param->tab[param->i][param->j] == 0) && param->max != 0)
+		rgb = rgb_color((unsigned char)trunc(sqrt((
+			double)param->tab[param->i][param->j]) *
 			RED / sqrt((double)param->max)),
-			(unsigned char)trunc(sqrt((double)param->tab[i][j]) *
+			(unsigned char)trunc(sqrt((double)param->tab[param->i][param->j]) *
 			GREEN / sqrt((double)param->max)),
-			(unsigned char)trunc(sqrt((double)param->tab[i][j]) *
+			(unsigned char)trunc(sqrt((double)param->tab[param->i][param->j]) *
 			BLUE / sqrt((double)param->max)));
 	return (rgb);
 }
 
 void	tab_to_pixels(t_param *param)
 {
-	int		i;
-	int		j;
 	int		col;
 
-	i = 0;
-	while (i < HEIGHT)
+	param->i = 0;
+	while (param->i < HEIGHT)
 	{
-		j = 0;
-		while (j < WIDTH)
+		param->j = 0;
+		while (param->j < WIDTH)
 		{
-			if ((col = buddha_color(i, j, param)))
-				store_pixel(param, i, j, col);
-			j++;
+			if ((col = buddha_color(param)))
+				store_pixel(param, col);
+			param->j++;
 		}
-		i++;
+		param->i++;
 	}
 }
 
-void	tab_update(t_param *param, int depth)
+void	tab_update(t_param *param)
 {
-	int		i;
-	int		tmp;
-
-	i = 0;
-	while (i < depth - 1)
+	param->k = 0;
+	while (param->k < param->depth - 1)
 	{
-		if ((int)trunc((SUP_BORN - param->buff[i][1]) * (double)WIDTH / 2.0 / SUP_BORN) > 0 &&
-			(int)trunc((SUP_BORN - param->buff[i][1]) * (double)WIDTH / 2.0 / SUP_BORN) < WIDTH &&
-			(int)trunc((SUP_BORN + param->buff[i][0]) * (double)HEIGHT / 2.0 / SUP_BORN) > 0 &&
-			(int)trunc((SUP_BORN + param->buff[i][0]) * (double)HEIGHT / 2.0 / SUP_BORN) < HEIGHT &&
-			((int)trunc((SUP_BORN - param->buff[i][1]) * (double)WIDTH / 2.0 / SUP_BORN) != WIDTH / 2.0 ||
-			(int)trunc((SUP_BORN + param->buff[i][0]) * (double)HEIGHT / 2.0 / SUP_BORN) != HEIGHT / 2.0))
+		if ((int)trunc((SUP_BORN - param->buff[param->k][1]) *
+					(double)WIDTH / 2.0 / SUP_BORN) > 0 &&
+			(int)trunc((SUP_BORN - param->buff[param->k][1]) *
+				(double)WIDTH / 2.0 / SUP_BORN) < WIDTH &&
+			(int)trunc((SUP_BORN + param->buff[param->k][0]) *
+				(double)HEIGHT / 2.0 / SUP_BORN) > 0 &&
+			(int)trunc((SUP_BORN + param->buff[param->k][0]) *
+				(double)HEIGHT / 2.0 / SUP_BORN) < HEIGHT &&
+			((int)trunc((SUP_BORN - param->buff[param->k][1]) *
+				(double)WIDTH / 2.0 / SUP_BORN) != WIDTH / 2.0 ||
+			(int)trunc((SUP_BORN + param->buff[param->k][0]) *
+				(double)HEIGHT / 2.0 / SUP_BORN) != HEIGHT / 2.0))
 		{
-			tmp = param->tab[(int)trunc((SUP_BORN + param->buff[i][0]) * (double)HEIGHT /
-				2.0 / SUP_BORN)][(int)trunc((SUP_BORN - param->buff[i][1]) * (double)WIDTH / 2.0 / SUP_BORN)]++;
-			if (tmp > param->max)
-				param->max = tmp;
+			param->tmp = param->tab[(int)trunc((SUP_BORN + param->buff[param->k]
+				[0]) * (double)HEIGHT / 2.0 / SUP_BORN)][(int)trunc((SUP_BORN -
+				param->buff[param->k][1]) * (double)WIDTH / 2.0 / SUP_BORN)]++;
+			if (param->tmp > param->max)
+				param->max = param->tmp;
 		}
-		i++;
+		param->k++;
 	}
 }
 
