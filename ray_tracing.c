@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:25:49 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/23 17:27:08 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/03/29 11:50:53 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	rt_filler(t_param *param)
 	int		a;
 
 	i = 0;
-	param->x_init[0] = -19.0;
-	param->x_init[1] = -19.0;
+	param->x_init[0] = 9.0;
+	param->x_init[1] = 9.0;
 	param->x_init[2] = 50.0;
 	param->x[0] = param->x_init[0];
 	param->x[1] = param->x_init[1];
-	param->x[3] = 38.0;
+	param->x[3] = 10.0;
 	param->src[0] = 0.0;
 	param->src[1] = 28.0;
 	param->src[2] = 0.0;
@@ -82,13 +82,13 @@ void	rt_filler(t_param *param)
 					view_check(param->x[2] * v[0] / v[2], param->x[2] * v[1] / v[2], param->x[2], param);
 					if (!sierpinski_carpet(param->x[2] * v[0] / v[2],
 						param->x[2] * v[1] / v[2], param->x[2] + param->ref[2], param))
-						store_pixel(param, i, j, 0x000000FF * (0.85 * param->n[2] + 0.15));
+						store_pixel(param, i, j, 0x000000FF * (0.15 * param->n[2] + 0.85));
 					else if (sierpinski_carpet(param->x[2] * v[0] / v[2] + param->ref[0],
 						param->x[2] * v[1] / v[2], param->x[2], param))
-						store_pixel(param, i, j, 0x000000FF * (0.85 * param->n[0] + 0.15));
+						store_pixel(param, i, j, 0x000000FF * (0.15 * param->n[0] + 0.85));
 					else if (sierpinski_carpet(param->x[2] * v[0] / v[2],
 						param->x[2] * v[1] / v[2] + param->ref[1], param->x[2], param))
-						store_pixel(param, i, j, 0x000000FF * (0.85 * param->n[1] + 0.15));
+						store_pixel(param, i, j, 0x000000FF * (0.15 * param->n[1] + 0.85));
 					a = 1;
 				}
 				param->x[2] += param->x[3] / (double)SI_LVL;
