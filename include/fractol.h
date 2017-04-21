@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/23 17:18:03 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/21 15:22:09 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ void			mandelbrot_starter(void);
 void			julia_starter(int argc, char **str);
 void			julia_exp_starter(int argc, char **str);
 void			buddha_starter(void);
-void			mandelbulb_starter(void);
-void			sierpinski_starter(void);
 /*
 **----------------------Filler des differentes fractales-----------------------
 */
@@ -94,8 +92,6 @@ void			mandelbrot_filler(t_param *param);
 void			julia_filler(t_param *param);
 void			julia_exp_filler(t_param *param);
 void			buddhabrot_filler(t_param *param);
-void			mandelbulb_filler(t_param *param);
-void			sierpinski_filler(t_param *param);
 
 int				my_key_func(int keycode, t_param *param);
 int				my_mouse_hook(int button, int x, int y, t_param *param);
@@ -109,10 +105,5 @@ void			tab_to_pixels(t_param *param);
 void			tab_update(t_param *param, int depth);
 double			**memory_buffer(void);
 int				**tab_init(void);
-/*
-**-----------------------Components for Menger Sponge---------------------------
-*/
-int				sierpinski_algo(int a, int b, int c);
-int				sierpinski_carpet(double x, double y, double z, t_param *param);
 
 #endif

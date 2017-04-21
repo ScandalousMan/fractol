@@ -6,7 +6,7 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/15 14:04:04 by aguemy            #+#    #+#              #
-#    Updated: 2017/03/15 14:10:13 by aguemy           ###   ########.fr        #
+#    Updated: 2017/04/21 15:19:50 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,7 @@ SRC = main.c \
 	julia.c \
 	buddhabrot.c \
 	buddhabrot_components.c \
-	julia_exp.c \
-	mandelbulb.c \
-	sierpinski.c
+	julia_exp.c
 
 # COLORS
 C_NO = "\033[00m"

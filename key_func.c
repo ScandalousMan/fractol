@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/15 15:13:51 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/21 15:21:02 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void	back_to_function(t_param *param)
 		buddhabrot_filler(param);
 	else if (param->origin == 3)
 		julia_exp_filler(param);
-	else if (param->origin == 4)
-		mandelbulb_filler(param);
-	else if (param->origin == 5)
-		sierpinski_filler(param);
 }
 
 int		my_key_func(int keycode, t_param *param)

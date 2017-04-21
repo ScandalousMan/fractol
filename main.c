@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:14 by aguemy            #+#    #+#             */
-/*   Updated: 2017/03/15 14:09:45 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/21 15:20:36 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ int		fractal_lister(int argc, char **str)
 		buddha_starter();
 	else if (!(ft_strcmp(str[1], "Julia_exp")) && (argc == 2 || argc == 4))
 		julia_exp_starter(argc, str);
-	else if (!(ft_strcmp(str[1], "Mandelbulb")) && argc == 2)
-		mandelbulb_starter();
-	else if (!(ft_strcmp(str[1], "Sponge")) && argc == 2)
-		sierpinski_starter();
 	else
 		return (error_input());
 	return (1);
