@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/22 14:52:47 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 15:10:54 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ typedef struct	s_param
 	int				k;
 	int				tmp;
 	int				count;
+	int				max;
 	int				col;
-	double			*x;
-	double			*x_init;
 	double			*z;
 	double			*c;
 	void			*mlx;
@@ -60,8 +59,6 @@ typedef struct	s_param
 	int				marg_i;
 	int				marg_j;
 	int				**tab;
-	int				*si;
-	int				max;
 	double			**buff;
 	int				origin;
 	int				flag;

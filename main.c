@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:14 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/22 14:05:21 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 15:09:17 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		fractal_lister(int argc, char **str)
 		burning_ship_starter();
 	else if ((argc == 2 || argc == 4) && !(ft_strcmp(str[1], "Julia_cube")))
 		julia_cube_starter(argc, str);
-	else if ((argc == 2 || argc == 4) && !(ft_strcmp(str[1], "Julia_sinh")))
+	else if ((argc == 2 || argc == 4) && !(ft_strcmp(str[1], "Julia_flower")))
 		julia_flower_starter(argc, str);
 	else
 		return (error_input());

@@ -6,16 +6,38 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/22 14:53:17 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 15:16:51 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+void	clear_buddha_components(t_param *param)
+{
+	param->i = 0;
+	while (param->i < HEIGHT || param->i < ITER_MAX)
+	{
+		if (param->i < HEIGHT)
+			free(param->tab[param->i]);
+		if (param->i < ITER_MAX)
+			free(param->buff[param->i]);
+		param->i++;
+	}
+	free(param->buff);
+	free(param->tab);
+}
+
 void	end_program(t_param *param)
 {
+	free(param->addr);
+	free(param->img);
+	free(param->win);
+	free(param->mlx);
 	free(param->z);
 	free(param->c);
+	if (param->origin == 2)
+		clear_buddha_components(param);
+	free(param);
 	exit(0);
 }
 
