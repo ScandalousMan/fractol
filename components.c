@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:53 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/21 17:52:36 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 15:00:26 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,25 @@ int		higher_than_two(double x, double y, double two)
 	return (1);
 }
 
+void	color_wheel(t_param *param)
+{
+	param->col = rgb_color((unsigned char)((param->col % 256 % 256 + 16) % 256),
+			(unsigned char)((param->col % 256 / 256 + 16) % 256),
+			(unsigned char)((param->col / 256 / 256 + 16) % 256));
+}
+
 int		rgb_color(unsigned char red, unsigned char green, unsigned char blue)
 {
-	int		rgb;
+	int				rgb;
 
 	rgb = (blue << 16) | (green << 8) | (red);
 	return (rgb);
 }
 
-t_param	param_init(void *mlx, void *win, void *img, char *addr)
-{
-	t_param	param;
-
-	param.mlx = mlx;
-	param.win = win;
-	param.img = img;
-	param.addr = addr;
-	param.marg_i = HEIGHT / 2;
-	param.marg_j = WIDTH / 2;
-	param.zoom = 1;
-	param.ratio = 4 / (double)(ft_min(HEIGHT, WIDTH));
-	return (param);
-}
-
 char	*addr_init(void *img)
 {
-	char	*addr;
-	int		detail[3];
+	char			*addr;
+	int				detail[3];
 
 	detail[0] = 4;
 	detail[1] = WIDTH * 4;

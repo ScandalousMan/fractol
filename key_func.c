@@ -6,11 +6,18 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/21 17:41:54 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 14:53:17 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	end_program(t_param *param)
+{
+	free(param->z);
+	free(param->c);
+	exit(0);
+}
 
 int		my_key_func(int keycode, t_param *param)
 {
@@ -26,8 +33,10 @@ int		my_key_func(int keycode, t_param *param)
 		param->marg_j += 10;
 	else if (keycode == 123)
 		param->marg_j -= 10;
+	else if (keycode == 0)
+		color_wheel(param);
 	else if (keycode == 53)
-		exit(0);
+		end_program(param);
 	ft_bzero(param->addr, HEIGHT * WIDTH * 4);
 	generic_filler(param);
 	return (0);

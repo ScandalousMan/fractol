@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 17:38:20 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/21 17:39:53 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 14:36:34 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	mandelbrot_algo(t_param *param)
 		if (higher_than_two(param->z[0], param->z[1], 2.0))
 		{
 			store_pixel(param, (double)(param->depth) /
-				(double)ITER_MAX_MANDELBROT * 0x00FFFFFF);
+				(double)ITER_MAX_MANDELBROT * param->col);
 			param->flag = 0;
 		}
 		param->depth++;
@@ -48,7 +48,7 @@ void	julia_algo(t_param *param)
 		if (higher_than_two(param->z[0], param->z[1], 2.0))
 		{
 			store_pixel(param, (double)(param->depth) /
-				(double)ITER_MAX_JULIA * 0x00FFFFFF);
+				(double)ITER_MAX_JULIA * param->col);
 			param->flag = 0;
 		}
 		param->depth++;

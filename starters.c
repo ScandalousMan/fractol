@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:44:10 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/21 17:55:40 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 14:51:15 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ void	param_zc_init(int argc, char **argv, t_param *param)
 		param->c[0] = -0.621;
 		param->c[1] = 0.0;
 	}
+	else if (param->origin == 5)
+	{
+		param->c[0] = 0.4;
+		param->c[1] = 0.0;
+	}
+	else if (param->origin == 6)
+	{
+		param->c[0] = 0.21;
+		param->c[1] = 0.0;
+	}
 }
 
 t_param	*generic_starter(void)
@@ -46,6 +56,7 @@ t_param	*generic_starter(void)
 	param->addr = addr_init(param->img);
 	param->marg_i = HEIGHT / 2;
 	param->marg_j = WIDTH / 2;
+	param->col = 0x00FF5379;
 	param->ratio = 4.0 / (double)(ft_min(HEIGHT, WIDTH));
 	return (param);
 }

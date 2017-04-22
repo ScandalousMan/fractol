@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/21 18:18:08 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 14:52:47 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define RED 155
 # define GREEN 200
 # define BLUE 255
-# define SI_LVL 729
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -47,6 +46,7 @@ typedef struct	s_param
 	int				k;
 	int				tmp;
 	int				count;
+	int				col;
 	double			*x;
 	double			*x_init;
 	double			*z;
@@ -78,10 +78,10 @@ typedef struct	s_param
 **----------------Utilitaires generiques pour fractales-------------------------
 */
 double			ft_atod(const char *str);
-t_param			param_init(void *mlx, void *win, void *img, char *addr);
 int				rgb_color(unsigned char r, unsigned char g, unsigned char b);
 void			store_pixel(t_param *param, int color);
 int				higher_than_two(double x, double y, double two);
+void			color_wheel(t_param *param);
 /*
 **----------------------Iterations of different suites--------------------------
 */
@@ -89,6 +89,8 @@ void			mandelbrot_iter(double x, double y, t_param *param);
 void			julia_exp_iter(double x, double y, t_param *param);
 void			julia_iter(double x, double y, t_param *param);
 void			burning_iter(double x, double y, t_param *param);
+void			julia_cube_iter(double x, double y, t_param *param);
+void			julia_flower_iter(double x, double y, t_param *param);
 /*
 **---------------------Starters of different fractals---------------------------
 */
@@ -98,15 +100,17 @@ void			generic_launcher(t_param *param);
 void			mandelbrot_starter(void);
 void			julia_starter(int argc, char **str);
 void			julia_exp_starter(int argc, char **str);
+void			julia_cube_starter(int argc, char **str);
+void			julia_flower_starter(int argc, char **str);
 void			buddha_starter(void);
 void			burning_ship_starter(void);
 /*
 **----------------------Filler des differentes fractales-----------------------
 */
-void			mandelbrot_filler(t_param *param);
+//void			mandelbrot_filler(t_param *param);
 void			generic_filler(t_param *param);
-void			julia_exp_filler(t_param *param);
-void			buddhabrot_filler(t_param *param);
+//void			julia_exp_filler(t_param *param);
+//void			buddhabrot_filler(t_param *param);
 /*
 **--------------------------------Algorithms------------------------------------
 */

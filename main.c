@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:14 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/21 17:52:56 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/22 14:05:21 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		error_input(void)
 	ft_putstr("usage: ./fractol fractal_name [options] :\n");
 	ft_putstr("- Mandelbrot\n- Julia [Re(Z0) Im(Z0)]\n- Buddhabrot\n");
 	ft_putstr("- Julia_exp [Re(Z0) Im(Z0)]\n- Burning_ship\n");
+	ft_putstr("- Julia_cube [Re(Z0) Im(Z0)]\n");
+	ft_putstr("- Julia_sinh [Re(Z0) Im(Z0)]\n");
 	return (0);
 }
 
@@ -51,6 +53,10 @@ int		fractal_lister(int argc, char **str)
 		julia_exp_starter(argc, str);
 	else if (argc == 2 && !(ft_strcmp(str[1], "Burning_ship")))
 		burning_ship_starter();
+	else if ((argc == 2 || argc == 4) && !(ft_strcmp(str[1], "Julia_cube")))
+		julia_cube_starter(argc, str);
+	else if ((argc == 2 || argc == 4) && !(ft_strcmp(str[1], "Julia_sinh")))
+		julia_flower_starter(argc, str);
 	else
 		return (error_input());
 	return (1);
