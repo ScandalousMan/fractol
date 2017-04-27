@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:53 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/22 15:00:26 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/27 18:03:53 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ int		higher_than_two(double x, double y, double two)
 	return (1);
 }
 
-void	color_wheel(t_param *param)
-{
-	param->col = rgb_color((unsigned char)((param->col % 256 % 256 + 16) % 256),
-			(unsigned char)((param->col % 256 / 256 + 16) % 256),
-			(unsigned char)((param->col / 256 / 256 + 16) % 256));
-}
-
 int		rgb_color(unsigned char red, unsigned char green, unsigned char blue)
 {
 	int				rgb;
@@ -34,16 +27,26 @@ int		rgb_color(unsigned char red, unsigned char green, unsigned char blue)
 	return (rgb);
 }
 
+void	color_wheel(t_param *param)
+{
+	param->col = rgb_color((unsigned char)((param->col % 256 % 256 + 16) % 256),
+			(unsigned char)((param->col % 256 / 256 + 16) % 256),
+			(unsigned char)((param->col / 256 / 256 + 16) % 256));
+}
+
 char	*addr_init(void *img)
 {
 	char			*addr;
-	int				detail[3];
+	int				*detail;
 
+	if (!(detail = (int*)malloc(sizeof(int) * 3)))
+		return (NULL);
 	detail[0] = 4;
 	detail[1] = WIDTH * 4;
 	detail[2] = 0;
 	addr = mlx_get_data_addr(img, &(detail[0]), &(detail[1]), &(detail[2]));
 	ft_bzero(addr, HEIGHT * WIDTH * 4);
+	free(detail);
 	return (addr);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/27 12:12:52 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/27 17:57:01 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include <math.h>
+#include <pthread.h>
 # include "../libft/libft.h"
 
 typedef struct	s_param
 {
+	pthread_t		*threads;
 	int				i;
 	int				j;
 	int				k;

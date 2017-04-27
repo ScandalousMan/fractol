@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/27 12:18:01 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/27 18:09:41 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	end_program(t_param *param)
 	if (param->origin == 2)
 		clear_buddha_components(param);
 	free(param);
-	exit(0);
+	while (1)
+	{
+	}
+//	exit(0);
 }
 
 int		my_key_func(int keycode, t_param *param)
