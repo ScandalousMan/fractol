@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/22 15:16:51 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/27 12:18:01 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ int		my_key_func(int keycode, t_param *param)
 		param->marg_j -= 10;
 	else if (keycode == 0)
 		color_wheel(param);
+	else if (keycode == 1 && (param->origin == 1 || param->origin == 3 ||
+				param->origin == 5 || param->origin == 6))
+		param->mouse_param_modifier = 1 - param->mouse_param_modifier;
 	else if (keycode == 53)
 		end_program(param);
 	ft_bzero(param->addr, HEIGHT * WIDTH * 4);

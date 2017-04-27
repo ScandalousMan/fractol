@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:44:10 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/22 14:51:15 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/27 12:15:21 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_param	*generic_starter(void)
 	param->marg_i = HEIGHT / 2;
 	param->marg_j = WIDTH / 2;
 	param->col = 0x00FF5379;
+	param->mouse_param_modifier = 0;
 	param->ratio = 4.0 / (double)(ft_min(HEIGHT, WIDTH));
 	return (param);
 }
@@ -65,6 +66,7 @@ void	generic_launcher(t_param *param)
 {
 	generic_filler(param);
 	mlx_hook(param->win, 2, 1L << 2, my_key_func, param);
+	mlx_hook(param->win, 6, 1L << 6, my_pointer_motion, param);
 	mlx_mouse_hook(param->win, my_mouse_hook, param);
 	mlx_loop(param->mlx);
 }

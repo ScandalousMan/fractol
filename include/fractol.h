@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/22 15:10:54 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/27 12:12:52 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct	s_param
 	int				origin;
 	int				flag;
 	int				depth;
+	int				mouse_param_modifier;
 	void			(*algo)(struct s_param *);
 	void			(*iter)(double, double, struct s_param *);
 }				t_param;
@@ -119,6 +120,7 @@ void			buddhabrot_algo(t_param *param);
 */
 int				my_key_func(int keycode, t_param *param);
 int				my_mouse_hook(int button, int x, int y, t_param *param);
+int				my_pointer_motion(int x, int y, t_param *param);
 void			back_to_function(t_param *param);
 char			*addr_init(void *img);
 /*
