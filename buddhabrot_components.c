@@ -6,25 +6,36 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 21:20:18 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/21 18:57:21 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/30 15:07:19 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+double	ratio_transform(int x)
+{
+	return (log( 1.0 + (double)x));
+}
+
 int		buddha_color(t_param *param)
 {
 	int		rgb;
+	double	ratio;
 
 	rgb = 0;
-	if (!(param->tab[param->i][param->j] == 0) && param->max != 0)
-		rgb = rgb_color((unsigned char)trunc(sqrt((
+	ratio =  (ratio_transform(param->tab[param->i][param->j]) /
+			ratio_transform(param->max));
+	if (param->tab[param->i][param->j] != 0 && param->max != 0)
+		rgb = rgb_color((unsigned char)((param->col % 256 % 256 + 16) * ratio),
+				(unsigned char)((param->col % 256 / 256 + 16) * ratio),
+				(unsigned char)((param->col / 256 / 256 + 16) * ratio));
+/*		rgb = rgb_color((unsigned char)trunc(sqrt((
 			double)param->tab[param->i][param->j]) *
-			RED / sqrt((double)param->max)),
+			(param->col % 256 % 256 + 16) / sqrt((double)param->max)),
 			(unsigned char)trunc(sqrt((double)param->tab[param->i][param->j]) *
-			GREEN / sqrt((double)param->max)),
+			(param->col % 256 / 256 + 16) / sqrt((double)param->max)),
 			(unsigned char)trunc(sqrt((double)param->tab[param->i][param->j]) *
-			BLUE / sqrt((double)param->max)));
+			(param->col / 256 / 256 + 16) / sqrt((double)param->max)));*/
 	return (rgb);
 }
 

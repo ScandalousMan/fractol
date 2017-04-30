@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:44:10 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/27 18:11:15 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/30 15:19:05 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ t_param	*generic_starter(void)
 			!(param->z = (double*)malloc(sizeof(double) * 2)) ||
 			!(param->c = (double*)malloc(sizeof(double) * 2)))
 		return (NULL);
-	param->mlx = mlx_init();
-	param->win = mlx_new_window(param->mlx, WIDTH + 100, HEIGHT + 100,
-		"Fract'ol aguemy");
-	param->img = mlx_new_image(param->mlx, WIDTH, HEIGHT);
-	param->addr = addr_init(param->img);
+	if (!(param->mlx = mlx_init()) || !(param->win = mlx_new_window(param->mlx,
+			WIDTH + 100, HEIGHT + 100, "Fract'ol aguemy")) ||
+			!(param->img = mlx_new_image(param->mlx, WIDTH, HEIGHT)) ||
+			!(param->addr = addr_init(param->img)))
+		return (NULL);
 	param->marg_i = HEIGHT / 2;
 	param->marg_j = WIDTH / 2;
 	param->col = 0x00FF5379;
@@ -64,11 +64,14 @@ t_param	*generic_starter(void)
 
 void	generic_launcher(t_param *param)
 {
-	generic_filler(param);
-	mlx_hook(param->win, 2, 1L << 2, my_key_func, param);
-	mlx_hook(param->win, 6, 1L << 6, my_pointer_motion, param);
-	mlx_mouse_hook(param->win, my_mouse_hook, param);
-	mlx_loop(param->mlx);
+	if (param)
+	{
+		generic_filler(param);
+		mlx_hook(param->win, 2, 1L << 2, my_key_func, param);
+		mlx_hook(param->win, 6, 1L << 6, my_pointer_motion, param);
+		mlx_mouse_hook(param->win, my_mouse_hook, param);
+		mlx_loop(param->mlx);
+	}
 }
 
 void	mandelbrot_starter(void)

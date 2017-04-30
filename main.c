@@ -6,12 +6,11 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:14 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/27 17:30:53 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/30 13:34:19 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <pthread.h>
 
 void	generic_filler(t_param *param)
 {
@@ -81,47 +80,10 @@ int		fractal_lister_enriched(char **str)
 	return (1);
 }
 
-int		check_errors(int argc, char **argv)
-{
-	int			i;
-
-	i = 1;
-	while (i < argc)
-	{
-		if (ft_strcmp(argv[i], "Mandelbrot") &&
-				ft_strcmp(argv[i], "Julia")  &&
-				ft_strcmp(argv[i], "Buddhabrot") &&
-				ft_strcmp(argv[i], "Julia_exp") &&
-				ft_strcmp(argv[i], "Burning_ship") &&
-				ft_strcmp(argv[i], "Julia_cube") &&
-				ft_strcmp(argv[i], "Julia_flower"))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int		main(int argc, char **argv)
 {
-	pthread_t	*threads;
-
 	if (argc == 2)
 		(fractal_lister_simple(argv[1]));
-	else if (argc == 3)
-	{
-		if (!(check_errors(argc, argv)))
-		{
-			error_input();
-			return (0);
-		}
-		if (!(threads = (pthread_t*)malloc(sizeof(pthread_t) * 2)))
-			return (0);
-		pthread_create(threads, NULL, &fractal_lister_simple, argv[1]);
-		pthread_create(threads + 1, NULL, &fractal_lister_simple, argv[2]);
-		pthread_join(threads[0], NULL);
-		pthread_join(threads[1], NULL);
-		return (1);
-	}
 	else if (argc == 4)
 		return (fractal_lister_enriched(argv));
 	else

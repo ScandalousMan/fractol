@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/27 17:57:01 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/30 13:28:47 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define RED 155
 # define GREEN 200
 # define BLUE 255
+# define ZOOM_MAX 20.0
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -42,7 +43,6 @@
 
 typedef struct	s_param
 {
-	pthread_t		*threads;
 	int				i;
 	int				j;
 	int				k;
@@ -69,11 +69,6 @@ typedef struct	s_param
 	void			(*algo)(struct s_param *);
 	void			(*iter)(double, double, struct s_param *);
 }				t_param;
-
-/*
-**------------------------Structures pour fractales 3D--------------------------
-*/
-
 /*
 **----------------Utilitaires generiques pour fractales-------------------------
 */
@@ -107,10 +102,7 @@ void			burning_ship_starter(void);
 /*
 **----------------------Filler des differentes fractales-----------------------
 */
-//void			mandelbrot_filler(t_param *param);
 void			generic_filler(t_param *param);
-//void			julia_exp_filler(t_param *param);
-//void			buddhabrot_filler(t_param *param);
 /*
 **--------------------------------Algorithms------------------------------------
 */

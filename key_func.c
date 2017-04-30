@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/27 18:09:41 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/04/30 15:19:38 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,14 @@ void	end_program(t_param *param)
 	if (param->origin == 2)
 		clear_buddha_components(param);
 	free(param);
-	while (1)
-	{
-	}
-//	exit(0);
+	exit(0);
 }
 
 int		my_key_func(int keycode, t_param *param)
 {
-	if (keycode == 12)
+	if (keycode == 12 && param->zoom < ZOOM_MAX)
 		param->zoom = param->zoom * ZOOM_PARAM;
-	else if (keycode == 13)
+	else if (keycode == 13 && param->zoom > 1.0 / ZOOM_MAX)
 		param->zoom = param->zoom / ZOOM_PARAM;
 	else if (keycode == 126)
 		param->marg_i += 10;
