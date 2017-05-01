@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 17:38:20 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/22 14:36:34 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/01 18:31:02 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	buddhabrot_algo(t_param *param)
 	while (param->buff && param->depth < ITER_MAX &&
 			!(higher_than_two(param->z[0], param->z[1], DIVERGE)))
 	{
-		param->iter(((double)(param->j) - (double)RATIO / 2.0) /
-			(double)RATIO * 2.0 * SUP_BORN, ((double)(param->i) -
-			(double)RATIO / 2.0) / (double)RATIO * 2.0 * SUP_BORN, param);
+		param->iter(((double)(param->j) - (double)param->marg_j) /
+			(double)RATIO * 2.0 * SUP_BORN * param->zoom, ((double)(param->i) -
+			(double)param->marg_i) / (double)RATIO * 2.0 * SUP_BORN * param->zoom, param);
 		param->buff[param->depth][0] = param->z[0];
 		param->buff[param->depth][1] = param->z[1];
 		param->depth++;

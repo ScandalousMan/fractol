@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/05/01 16:31:44 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/01 17:51:31 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include <math.h>
-#include <pthread.h>
 # include "../libft/libft.h"
 
 typedef struct	s_param
@@ -100,7 +99,7 @@ void			julia_flower_iter(double x, double y, t_param *param);
 void			param_zc_init(int argc, char **argv, t_param *param);
 t_param			*generic_starter(t_mlx *multi);
 void			generic_launcher(t_param *param);
-void			mandelbrot_starter(t_mlx* multi);
+void			mandelbrot_starter(t_mlx *multi);
 void			julia_starter(int argc, char **str, t_mlx *multi);
 void			julia_exp_starter(int argc, char **str, t_mlx *multi);
 void			julia_cube_starter(int argc, char **str, t_mlx *multi);
