@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:38:39 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/30 15:19:38 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/01 15:05:37 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	end_program(t_param *param)
 {
 	free(param->addr);
 	free(param->img);
-	free(param->win);
-	free(param->mlx);
+	mlx_destroy_window(param->mlx, param->win);
 	free(param->z);
 	free(param->c);
 	if (param->origin == 2)

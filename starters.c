@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:44:10 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/30 15:19:05 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/01 16:17:40 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	param_zc_init(int argc, char **argv, t_param *param)
 	}
 }
 
-t_param	*generic_starter(void)
+t_param	*generic_starter(t_mlx *multi)
 {
 	t_param	*param;
 
@@ -49,10 +49,16 @@ t_param	*generic_starter(void)
 			!(param->z = (double*)malloc(sizeof(double) * 2)) ||
 			!(param->c = (double*)malloc(sizeof(double) * 2)))
 		return (NULL);
-	if (!(param->mlx = mlx_init()) || !(param->win = mlx_new_window(param->mlx,
-			WIDTH + 100, HEIGHT + 100, "Fract'ol aguemy")) ||
-			!(param->img = mlx_new_image(param->mlx, WIDTH, HEIGHT)) ||
-			!(param->addr = addr_init(param->img)))
+	if (multi && multi->mlx)
+	{
+		multi->param[multi->ref] = param;
+		param->mlx = multi->mlx;
+	}
+	else if (!(param->mlx = mlx_init()))
+		return (NULL);
+	if (!(param->win = mlx_new_window(param->mlx, WIDTH + 100, HEIGHT + 100,
+			"Fract'ol aguemy")) || !(param->img = mlx_new_image(param->mlx,
+			WIDTH, HEIGHT)) || !(param->addr = addr_init(param->img)))
 		return (NULL);
 	param->marg_i = HEIGHT / 2;
 	param->marg_j = WIDTH / 2;
@@ -72,13 +78,15 @@ void	generic_launcher(t_param *param)
 		mlx_mouse_hook(param->win, my_mouse_hook, param);
 		mlx_loop(param->mlx);
 	}
+	else
+		ft_putstr("One malloc function failed\n");
 }
 
-void	mandelbrot_starter(void)
+void	mandelbrot_starter(t_mlx *multi)
 {
 	t_param	*param;
 
-	param = generic_starter();
+	param = generic_starter(multi);
 	if (param)
 	{
 		param->origin = 0;
@@ -89,11 +97,11 @@ void	mandelbrot_starter(void)
 	generic_launcher(param);
 }
 
-void	julia_starter(int argc, char **argv)
+void	julia_starter(int argc, char **argv, t_mlx *multi)
 {
 	t_param	*param;
 
-	param = generic_starter();
+	param = generic_starter(multi);
 	if (param)
 	{
 		param->origin = 1;

@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/30 13:28:47 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/01 16:31:44 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,14 @@ typedef struct	s_param
 	void			(*algo)(struct s_param *);
 	void			(*iter)(double, double, struct s_param *);
 }				t_param;
+
+typedef struct	s_mlx
+{
+	void			*mlx;
+	char			**argv;
+	int				ref;
+	struct s_param	**param;
+}				t_mlx;
 /*
 **----------------Utilitaires generiques pour fractales-------------------------
 */
@@ -90,15 +98,15 @@ void			julia_flower_iter(double x, double y, t_param *param);
 **---------------------Starters of different fractals---------------------------
 */
 void			param_zc_init(int argc, char **argv, t_param *param);
-t_param			*generic_starter();
+t_param			*generic_starter(t_mlx *multi);
 void			generic_launcher(t_param *param);
-void			mandelbrot_starter(void);
-void			julia_starter(int argc, char **str);
-void			julia_exp_starter(int argc, char **str);
-void			julia_cube_starter(int argc, char **str);
-void			julia_flower_starter(int argc, char **str);
-void			buddha_starter(void);
-void			burning_ship_starter(void);
+void			mandelbrot_starter(t_mlx* multi);
+void			julia_starter(int argc, char **str, t_mlx *multi);
+void			julia_exp_starter(int argc, char **str, t_mlx *multi);
+void			julia_cube_starter(int argc, char **str, t_mlx *multi);
+void			julia_flower_starter(int argc, char **str, t_mlx *multi);
+void			buddha_starter(t_mlx *multi);
+void			burning_ship_starter(t_mlx *multi);
 /*
 **----------------------Filler des differentes fractales-----------------------
 */
@@ -125,5 +133,7 @@ void			tab_to_pixels(t_param *param);
 void			tab_update(t_param *param);
 double			**memory_buffer(void);
 int				**tab_init(void);
+void			clear_tab(t_param *param);
+int				buddha_color(t_param *param);
 
 #endif

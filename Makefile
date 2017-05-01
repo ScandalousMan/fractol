@@ -6,7 +6,7 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/15 14:04:04 by aguemy            #+#    #+#              #
-#    Updated: 2017/04/27 16:58:52 by aguemy           ###   ########.fr        #
+#    Updated: 2017/05/01 16:32:22 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC = main.c \
 	key_func.c \
 	mouse_func.c \
 	algorithms.c \
+	buddhabrot_components2.c \
 	buddhabrot_components.c
 
 # COLORS
