@@ -6,14 +6,14 @@
 #    By: aguemy <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/15 14:04:04 by aguemy            #+#    #+#              #
-#    Updated: 2017/05/01 16:32:22 by aguemy           ###   ########.fr        #
+#    Updated: 2017/05/08 15:39:31 by aguemy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 CC = gcc
 CFLAGS =  -Wall -Werror -Wextra
-LFLAGS = -lmlx -framework AppKit -framework OpenGL -L $(LIB_PATH) -lft -D_REENTRANT
+LFLAGS = -lmlx -framework AppKit -framework OpenGL -L $(LIB_PATH) -lft
 HEADER = -I./include
 OBJ = $(SRC:.c=.o)
 LIB_PATH = ./libft/
