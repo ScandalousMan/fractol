@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:44:10 by aguemy            #+#    #+#             */
-/*   Updated: 2017/05/01 18:46:29 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/08 14:53:42 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	buddha_starter(t_mlx *multi)
 		param->tmp = -1;
 		param->tab = tab_init();
 		param->buff = memory_buffer();
-		param->marg_i = (double)SUP_BORN;
-		param->marg_j = (double)SUP_BORN;
+		param->marg_i = 0;
+		param->marg_j = 0;
 	}
 	if (param->tab && param->buff)
 	{

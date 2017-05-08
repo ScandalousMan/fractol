@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/01 16:28:59 by aguemy            #+#    #+#             */
-/*   Updated: 2017/05/01 18:39:04 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/08 14:55:47 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		buddha_color(t_param *param)
 	double	ratio;
 
 	rgb = 0;
-	param->max = 74;
 	ratio = (ratio_transform(param->tab[param->i][param->j]) /
 			ratio_transform(param->max));
 	if (param->tab[param->i][param->j] != 0 && param->max != 0)

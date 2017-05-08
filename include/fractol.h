@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:39:54 by aguemy            #+#    #+#             */
-/*   Updated: 2017/05/01 17:51:31 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/08 15:26:41 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@
 # define ITER_MAX_JULIA_EXP 500
 # define JULIA_MODULE 1000
 # define SIDE 729
-# define RATIO 800
 # define DIVERGE 2.0
 # define SUP_BORN 1.5
 # define ZOOM_PARAM 1.1
 # define RED 155
 # define GREEN 200
 # define BLUE 255
-# define ZOOM_MAX 20.0
+# define ZOOM_MAX 100.0
 
 # include <unistd.h>
 # include <fcntl.h>

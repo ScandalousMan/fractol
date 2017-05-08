@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 16:30:25 by aguemy            #+#    #+#             */
-/*   Updated: 2017/04/27 12:16:22 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/08 15:23:55 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,25 @@ int		my_pointer_motion(int x, int y, t_param *param)
 
 void	my_mouse_dezoom(int x, int y, t_param *param)
 {
-	param->zoom = param->zoom * ZOOM_PARAM;
-	param->marg_j = (double)x +
-		((double)param->marg_j - (double)x) / ZOOM_PARAM;
-	param->marg_i = (double)y +
-		((double)param->marg_i - (double)y) / ZOOM_PARAM;
-	if (param->origin == 4)
+	if (param->zoom < ZOOM_MAX)
 	{
-		param->marg_i += (double)HEIGHT / 2.0 * (1.0 - 1.0 / ZOOM_PARAM);
-		param->marg_j += (double)WIDTH / 2.0 * (1.0 - 1.0 / ZOOM_PARAM);
+		param->zoom = param->zoom * ZOOM_PARAM;
+		param->marg_j = (double)x +
+			((double)param->marg_j - (double)x) / ZOOM_PARAM;
+		param->marg_i = (double)y +
+			((double)param->marg_i - (double)y) / ZOOM_PARAM;
 	}
 }
 
 void	my_mouse_zoom(int x, int y, t_param *param)
 {
-	param->zoom = param->zoom / ZOOM_PARAM;
-	param->marg_j = (double)x +
-		ZOOM_PARAM * ((double)param->marg_j - (double)x);
-	param->marg_i = (double)y +
-		ZOOM_PARAM * ((double)param->marg_i - (double)y);
-	if (param->origin == 4)
+	if (param->zoom > 1.0 / ZOOM_MAX)
 	{
-		param->marg_i += (double)HEIGHT / 2.0 * (1.0 - ZOOM_PARAM);
-		param->marg_j += (double)WIDTH / 2.0 * (1.0 - ZOOM_PARAM);
+		param->zoom = param->zoom / ZOOM_PARAM;
+		param->marg_j = (double)x +
+			ZOOM_PARAM * ((double)param->marg_j - (double)x);
+		param->marg_i = (double)y +
+			ZOOM_PARAM * ((double)param->marg_i - (double)y);
 	}
 }
 

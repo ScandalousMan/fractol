@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 21:20:18 by aguemy            #+#    #+#             */
-/*   Updated: 2017/05/01 18:45:37 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/08 14:58:15 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,45 +49,25 @@ void	tab_update(t_param *param)
 	param->k = 0;
 	while (param->k < param->depth - 1)
 	{
-
-		if ((int)trunc((param->marg_j - param->buff[param->k][1]) *
-					(double)WIDTH / 2.0 / SUP_BORN / param->zoom) > 0 &&
-			(int)trunc((param->marg_j - param->buff[param->k][1]) *
-				(double)WIDTH / 2.0 / SUP_BORN / param->zoom) < WIDTH &&
-			(int)trunc((param->marg_i + param->buff[param->k][0]) *
-				(double)HEIGHT / 2.0 / SUP_BORN / param->zoom) > 0 &&
-			(int)trunc((param->marg_i + param->buff[param->k][0]) *
-				(double)HEIGHT / 2.0 / SUP_BORN / param->zoom) < HEIGHT &&
-			((int)trunc((param->marg_j - param->buff[param->k][1]) *
-				(double)WIDTH / 2.0 / SUP_BORN / param->zoom) != WIDTH / 2.0 ||
-			(int)trunc((param->marg_i + param->buff[param->k][0]) *
-				(double)HEIGHT / 2.0 / SUP_BORN / param->zoom) != HEIGHT / 2.0))
-		{
-			param->tmp = param->tab[(int)trunc((param->marg_i + param->buff[param->k]
-				[0]) * (double)HEIGHT / 2.0 / SUP_BORN / param->zoom)]
-				[(int)trunc((param->marg_j - param->buff[param->k][1]) *
-				(double)WIDTH / 2.0 / SUP_BORN / param->zoom)]++;
-/*
-		if ((int)trunc((SUP_BORN - param->buff[param->k][1]) *
-					(double)WIDTH / 2.0 / SUP_BORN / param->zoom) > 0 &&
-			(int)trunc((SUP_BORN - param->buff[param->k][1]) *
-				(double)WIDTH / 2.0 / SUP_BORN / param->zoom) < WIDTH &&
-			(int)trunc((SUP_BORN + param->buff[param->k][0]) *
-				(double)HEIGHT / 2.0 / SUP_BORN / param->zoom) > 0 &&
-			(int)trunc((SUP_BORN + param->buff[param->k][0]) *
-				(double)HEIGHT / 2.0 / SUP_BORN / param->zoom) < HEIGHT &&
-			((int)trunc((SUP_BORN - param->buff[param->k][1]) *
-				(double)WIDTH / 2.0 / SUP_BORN / param->zoom) != WIDTH / 2.0 ||
-			(int)trunc((SUP_BORN + param->buff[param->k][0]) *
-				(double)HEIGHT / 2.0 / SUP_BORN / param->zoom) != HEIGHT / 2.0))
-		{
-			param->tmp = param->tab[(int)trunc((SUP_BORN + param->buff[param->k]
-				[0]) * (double)HEIGHT / 2.0 / SUP_BORN / param->zoom)]
-				[(int)trunc((SUP_BORN - param->buff[param->k][1]) *
-				(double)WIDTH / 2.0 / SUP_BORN / param->zoom)]++;
-*/			if (param->tmp > param->max)
-				param->max = param->tmp;
-		}
+		if ((int)((param->buff[param->k][1] + SUP_BORN) * (double)HEIGHT / 2.0 /
+			SUP_BORN / param->zoom) + param->marg_i > 0 &&
+			(int)((param->buff[param->k][1] + SUP_BORN) * (double)HEIGHT / 2.0 /
+			SUP_BORN / param->zoom) + param->marg_i < HEIGHT &&
+			(int)((param->buff[param->k][0] + SUP_BORN) * (double)WIDTH / 2.0 /
+			SUP_BORN / param->zoom) + param->marg_j > 0 &&
+			(int)((param->buff[param->k][0] + SUP_BORN) * (double)WIDTH / 2.0 /
+			SUP_BORN / param->zoom) + param->marg_j < WIDTH &&
+			((int)((param->buff[param->k][1] + SUP_BORN) * (double)HEIGHT /
+			2.0 / SUP_BORN / param->zoom) + param->marg_i != HEIGHT / 2.0 ||
+			(int)((param->buff[param->k][0] + SUP_BORN) * (double)WIDTH /
+			2.0 / SUP_BORN / param->zoom) + param->marg_j != WIDTH / 2.0))
+			param->tmp = param->tab[(int)((param->buff[param->k][1] +
+				SUP_BORN) * (double)HEIGHT / 2.0 / SUP_BORN / param->zoom) +
+				param->marg_i][(int)((param->buff[param->k][0] + SUP_BORN) *
+				(double)WIDTH / 2.0 / SUP_BORN / param->zoom) +
+				param->marg_j]++;
+		if (param->tmp > param->max)
+			param->max = param->tmp;
 		param->k++;
 	}
 }

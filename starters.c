@@ -6,7 +6,7 @@
 /*   By: aguemy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:44:10 by aguemy            #+#    #+#             */
-/*   Updated: 2017/05/01 16:17:40 by aguemy           ###   ########.fr       */
+/*   Updated: 2017/05/08 15:18:30 by aguemy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	generic_launcher(t_param *param)
 		mlx_loop(param->mlx);
 	}
 	else
-		ft_putstr("One malloc function failed\n");
+		ft_putstr("One malloc failed\n");
 }
 
 void	mandelbrot_starter(t_mlx *multi)
